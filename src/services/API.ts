@@ -1,24 +1,9 @@
-import {shuffleArray} from "./utils/utils";
+import {Difficulty, Type} from "../enums/options";
+import {Question} from "../types/quiz";
+import {shuffleArray} from "../utils/shuffleArray";
 
-export type Question = {
-    category: string;
-    correct_answer: string;
-    difficulty: string;
-    incorrect_answers: string[];
-    question: string;
-    type: string;
-}
-
-export type QuestionState = Question & { answers: string[] }
-
-export enum Difficulty {
-    EASY = "easy",
-    MEDIUM = "medium",
-    HARD = "hard"
-}
-
-export const fetchTriviaDatabase = async (amount: number, difficulty: Difficulty) => {
-    const endpoint = `https://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&type=multiple`
+export const fetchOpenTriviaDatabase = async (amount: number, difficulty: Difficulty, type: Type) => {
+    const endpoint = `https://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&type=${type}`
     const data = await (await fetch(endpoint)).json()
     return data.results.map((question: Question) => ({
             ...question,

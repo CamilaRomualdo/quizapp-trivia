@@ -1,3 +1,10 @@
+export type Answer = {
+    answer: string;
+    correct: boolean;
+    correctAnswer: string;
+    question: string;
+}
+
 export type Question = {
     category: string;
     correct_answer: string;
@@ -8,3 +15,4 @@ export type Question = {
 }
 
 export type QuestionState = Question & { answers: string[] }
+
